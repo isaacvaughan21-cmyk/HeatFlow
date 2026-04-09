@@ -1,0 +1,76 @@
+export const RESEARCH = {
+  basic_smelting: {
+    name: 'Basic Smelting',
+    cost: 50,
+    unlocks: ['furnace'],
+    requires: [],
+  },
+  piping: {
+    name: 'Thermal Piping',
+    cost: 30,
+    unlocks: ['pipe_hot', 'pipe_cold'],
+    requires: [],
+  },
+  forging: {
+    name: 'Forging',
+    cost: 120,
+    unlocks: ['forge'],
+    requires: ['basic_smelting'],
+  },
+  cooling: {
+    name: 'Cryo Systems',
+    cost: 80,
+    unlocks: ['cooler'],
+    requires: ['piping'],
+  },
+  heating: {
+    name: 'Radiant Heating',
+    cost: 60,
+    unlocks: ['heater'],
+    requires: ['piping'],
+  },
+  insulate: {
+    name: 'Insulation',
+    cost: 40,
+    unlocks: ['insulation'],
+    requires: ['piping'],
+  },
+  power: {
+    name: 'Heat Engines',
+    cost: 150,
+    unlocks: ['turbine'],
+    requires: ['basic_smelting', 'piping'],
+  },
+  assembly: {
+    name: 'Assembly',
+    cost: 250,
+    unlocks: ['assembler'],
+    requires: ['forging'],
+  },
+  botany: {
+    name: 'Thermal Botany',
+    cost: 200,
+    unlocks: ['greenhouse'],
+    requires: ['cooling', 'heating'],
+  },
+  research_lab: {
+    name: 'Research Lab',
+    cost: 100,
+    unlocks: ['lab'],
+    requires: ['basic_smelting'],
+  },
+  zone_temperate: {
+    name: 'Temperate Zone',
+    cost: 300,
+    unlocks: [],
+    requires: ['power'],
+    unlocksZone: 'temperate',
+  },
+  zone_volcanic: {
+    name: 'Volcanic Zone',
+    cost: 800,
+    unlocks: [],
+    requires: ['zone_temperate', 'forging'],
+    unlocksZone: 'volcanic',
+  },
+};
