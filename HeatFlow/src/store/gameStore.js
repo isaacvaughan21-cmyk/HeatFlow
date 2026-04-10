@@ -31,19 +31,16 @@ const useGameStore = create((set, get) => ({
   placeBuilding: (x, y) => {
     const state = get();
     const buildingId = state.selectedBuilding;
-    if (!buildingId) return;
+    if (!buildingId) return 'none';
 
     const building = BUILDINGS[buildingId];
-    if (!building) return;
+    if (!building) return 'none';
 
     const cell = state.grid[y]?.[x];
-    if (!cell || cell.building) return;
+    if (!cell) return 'none';
+    if (cell.building) return 'occupied';
 
-    if (state.money < building.cost) {
-      set({ notification: 'Not enough money!' });
-      setTimeout(() => set({ notification: null }), 2000);
-      return;
-    }
+    if (state.money < building.cost) return 'broke';
 
     const newGrid = state.grid.map((row) => row.map((c) => ({ ...c })));
     newGrid[y][x] = { ...newGrid[y][x], building: buildingId };
@@ -52,6 +49,7 @@ const useGameStore = create((set, get) => ({
       grid: newGrid,
       money: state.money - building.cost,
     });
+    return 'placed';
   },
 
   removeBuilding: (x, y) => {

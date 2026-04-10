@@ -1,14 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native';
-import { C } from '../theme/colors';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import useGameStore from '../store/gameStore';
+import { ZONES } from '../data/zones';
+import GameGrid from '../components/GameGrid';
+import Notification from '../components/Notification';
 
 export default function GameScreen() {
+  const zone = useGameStore((s) => s.zone);
+  const bg = ZONES[zone]?.bg || '#0d1117';
+
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.center}>
-        <Text style={styles.text}>Game Grid Here</Text>
-      </View>
+    <SafeAreaView style={[styles.container, { backgroundColor: bg }]}>
+      <GameGrid />
+      <Notification />
     </SafeAreaView>
   );
 }
@@ -16,15 +20,5 @@ export default function GameScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: C.dark,
-  },
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    color: C.text,
-    fontSize: 18,
   },
 });
